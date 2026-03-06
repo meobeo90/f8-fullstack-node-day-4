@@ -1,8 +1,9 @@
 const postModel = require("@/models/post.model");
 async function getAllPosts(query) {
   let page = parseInt(query.page) || 1;
-  let limit = parseInt(query.limit) || 5;
+  let limit = parseInt(query.limit) || 20;
   const user_id = query.user_id;
+  if (limit < 1) limit = 20;
   if (limit > 500) limit = 500;
   const offset = (page - 1) * limit;
   const [posts, total] = await Promise.all([
